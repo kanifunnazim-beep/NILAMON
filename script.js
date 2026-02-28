@@ -32,26 +32,43 @@ elemenTanggal.forEach(el => {
     el.innerText = tglHariIni;
 });
 
-// 2. MEMBUAT GRAFIK DUMMY DENGAN CHART.JS
-const ctx = document.getElementById('kualitasAirChart').getContext('2d');
+// =========================================
+// GRAFIK 1: pH, Turbidity, DO, Suhu
+// =========================================
+const ctx1 = document.getElementById('kualitasAirChart').getContext('2d');
 
-new Chart(ctx, {
-    type: 'line', // Jenis grafik: garis
+new Chart(ctx1, {
+    type: 'line',
     data: {
-        labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'], // Label bawah
+        labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'], 
         datasets: [
             {
                 label: 'pH Air',
-                data: [7.1, 7.2, 7.0, 7.4, 7.3, 7.2, 7.5], // Data bohong-bohongan
+                data: [7.1, 7.2, 7.0, 7.1, 7.3, 7.2, 7.1], 
                 borderColor: '#0984e3',
-                backgroundColor: 'rgba(9, 132, 227, 0.1)',
+                backgroundColor: 'transparent',
                 borderWidth: 2,
-                fill: true,
-                tension: 0.4 // Membuat garis melengkung (smooth)
+                tension: 0.4
+            },
+            {
+                label: 'Turbidity (NTU)',
+                data: [12, 15, 14, 16, 15, 13, 14], 
+                borderColor: '#00b894',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                tension: 0.4
+            },
+            {
+                label: 'DO (mg/L)',
+                data: [6.5, 6.6, 6.4, 6.5, 6.7, 6.5, 6.6], 
+                borderColor: '#6c5ce7',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                tension: 0.4
             },
             {
                 label: 'Suhu (°C)',
-                data: [28, 28.5, 27.8, 29, 28.2, 27.5, 28.1],
+                data: [27.5, 28.0, 28.5, 29.0, 28.8, 28.2, 28.0], 
                 borderColor: '#e17055',
                 backgroundColor: 'transparent',
                 borderWidth: 2,
@@ -61,11 +78,41 @@ new Chart(ctx, {
     },
     options: {
         responsive: true,
-        plugins: {
-            legend: { position: 'top' }
-        },
+        plugins: { legend: { position: 'top' } },
         scales: {
-            y: { beginAtZero: false }
+            y: { title: { display: true, text: 'Nilai Sensor' } },
+            x: { title: { display: true, text: 'Waktu (Jam)' } }
+        }
+    }
+});
+
+// =========================================
+// GRAFIK 2: KHUSUS TDS
+// =========================================
+const ctx2 = document.getElementById('tdsChart').getContext('2d');
+
+new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'], 
+        datasets: [
+            {
+                label: 'TDS (ppm)',
+                data: [340, 345, 350, 348, 352, 350, 345], 
+                borderColor: '#fdcb6e', // Warna Kuning/Emas
+                backgroundColor: 'rgba(253, 203, 110, 0.2)', // Sedikit efek warna di bawah garis
+                borderWidth: 2,
+                fill: true, // Membuat grafik TDS sedikit berbeda visualnya
+                tension: 0.4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+            y: { title: { display: true, text: 'Nilai TDS (ppm)' } },
+            x: { title: { display: true, text: 'Waktu (Jam)' } }
         }
     }
 });

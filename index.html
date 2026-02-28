@@ -39,16 +39,21 @@
 
                 <section class="cards-grid">
                     <div class="card"><div class="card-icon"><i class="fa-solid fa-flask"></i></div><div class="card-data"><h4>pH Air</h4><h2 id="val-ph">7.2</h2></div></div>
-                    <div class="card"><div class="card-icon"><i class="fa-solid fa-smog"></i></div><div class="card-data"><h4>Turbidity</h4><h2 id="val-tur">15 NTU</h2></div></div>
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-droplet"></i></div><div class="card-data"><h4>Turbidity</h4><h2 id="val-tur">15 NTU</h2></div></div>
                     <div class="card"><div class="card-icon"><i class="fa-solid fa-cubes"></i></div><div class="card-data"><h4>TDS</h4><h2 id="val-tds">350 ppm</h2></div></div>
-                    <div class="card"><div class="card-icon"><i class="fa-solid fa-wind"></i></div><div class="card-data"><h4>DO</h4><h2 id="val-do">6.5 mg/L</h2></div></div>
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-bubbles"></i></div><div class="card-data"><h4>DO</h4><h2 id="val-do">6.5 mg/L</h2></div></div>
                     <div class="card"><div class="card-icon"><i class="fa-solid fa-temperature-half"></i></div><div class="card-data"><h4>Suhu Air</h4><h2 id="val-suhu">28 °C</h2></div></div>
                 </section>
 
                 <section class="chart-section">
-                    <div class="chart-card">
-                        <h3>Grafik Tren Kualitas Air</h3>
+                    <div class="chart-card" style="margin-bottom: 20px;">
+                        <h3>Grafik pH, Turbidity, DO & Suhu (Per Jam)</h3>
                         <canvas id="kualitasAirChart"></canvas>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Grafik TDS (Per Jam)</h3>
+                        <canvas id="tdsChart"></canvas>
                     </div>
                 </section>
             </div>
