@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Polinema</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-area">
+                <img src="Logo-Polinema-Politeknik-Negeri-Malang-Format-CDR-PNG-SVG.webp" alt="Logo Polinema" class="logo-img">
+                <h2>POLINEMA</h2>
+            </div>
+            
+            <ul class="nav-menu">
+                <li id="menu-air" class="active" onclick="gantiTab('air')"><i class="fa-solid fa-water"></i> Kualitas Air</li>
+                <li id="menu-pakan" onclick="gantiTab('pakan')"><i class="fa-solid fa-fish"></i> Pakan Ikan</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+
+            <div id="tab-air" class="konten-tab aktif">
+                <header class="header">
+                    <div>
+                        <h1>Monitoring Kualitas Air</h1>
+                        <p class="subtitle">Data *real-time* dari LoRa Gateway</p>
+                    </div>
+                    <div class="date-box">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span class="tanggal-hari-ini">Memuat tanggal...</span>
+                    </div>
+                </header>
+
+                <section class="cards-grid">
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-flask"></i></div><div class="card-data"><h4>pH Air</h4><h2 id="val-ph">7.2</h2></div></div>
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-smog"></i></div><div class="card-data"><h4>Turbidity</h4><h2 id="val-tur">15 NTU</h2></div></div>
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-cubes"></i></div><div class="card-data"><h4>TDS</h4><h2 id="val-tds">350 ppm</h2></div></div>
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-wind"></i></div><div class="card-data"><h4>DO</h4><h2 id="val-do">6.5 mg/L</h2></div></div>
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-temperature-half"></i></div><div class="card-data"><h4>Suhu Air</h4><h2 id="val-suhu">28 °C</h2></div></div>
+                </section>
+
+                <section class="chart-section">
+                    <div class="chart-card">
+                        <h3>Grafik Tren Kualitas Air</h3>
+                        <canvas id="kualitasAirChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <div id="tab-pakan" class="konten-tab">
+                <header class="header">
+                    <div>
+                        <h1>Monitoring Smart Feeder</h1>
+                        <p class="subtitle">Sistem Pakan Ikan Otomatis</p>
+                    </div>
+                    <div class="date-box">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span class="tanggal-hari-ini">Memuat tanggal...</span>
+                    </div>
+                </header>
+
+                <section class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon" style="background-color: #fff3e0; color: #ff9800;">
+                            <i class="fa-solid fa-weight-scale"></i>
+                        </div>
+                        <div class="card-data">
+                            <h4>Berat Pakan (Loadcell)</h4>
+                            <h2 id="val-berat">5.2 kg</h2>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon" style="background-color: #e8f5e9; color: #4caf50;">
+                            <i class="fa-solid fa-ruler-vertical"></i>
+                        </div>
+                        <div class="card-data">
+                            <h4>Sisa Pakan (Ultrasonik)</h4>
+                            <h2 id="val-sisa">75 %</h2>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
