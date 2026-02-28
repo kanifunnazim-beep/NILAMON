@@ -84,3 +84,70 @@ body { background-color: #f5f6fa; color: #2d3436; }
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* =========================================
+   RESPONSIF UNTUK LAYAR HP (MOBILE VIEW)
+   ========================================= */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column; /* Mengubah susunan dari kiri-kanan menjadi atas-bawah */
+    }
+
+    /* 1. Menyesuaikan Sidebar menjadi Header Atas */
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* 2. Merapikan Logo agar sejajar dengan teks */
+    .logo-area {
+        margin-bottom: 15px;
+        padding-top: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .logo-img {
+        width: 45px;
+        margin-bottom: 0;
+    }
+    .logo-area h2 {
+        font-size: 18px;
+    }
+
+    /* 3. Membuat tombol menu berjajar ke samping (kiri-kanan) */
+    .nav-menu {
+        display: flex;
+        gap: 10px;
+    }
+    .nav-menu li {
+        flex: 1; /* Membuat lebar tombol sama rata */
+        margin-bottom: 0;
+        padding: 10px;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .nav-menu li i {
+        margin-right: 8px;
+    }
+
+    /* 4. Menyesuaikan area konten agar tidak terlalu mepet */
+    .main-content {
+        padding: 15px;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .date-box {
+        width: 100%;
+        text-align: center;
+    }
+    .card-data h2 {
+        font-size: 20px;
+    }
+}
