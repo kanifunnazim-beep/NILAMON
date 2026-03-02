@@ -21,7 +21,7 @@ function gantiTab(namaTab) {
 }
 
 // =========================================
-// FUNGSI TANGGAL (Diperbarui agar bisa tampil di kedua halaman)
+// FUNGSI TANGGAL (agar bisa tampil di kedua halaman)
 // =========================================
 const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 const tglHariIni = new Date().toLocaleDateString('id-ID', dateOptions);
