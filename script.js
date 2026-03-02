@@ -116,3 +116,34 @@ new Chart(ctx2, {
         }
     }
 });
+
+// =========================================
+// FUNGSI TARIK DATA REAL-TIME DARI VPS
+// =========================================
+function updateData() {
+    fetch('http://203.194.114.41/get_data.php')
+        .then(response => response.json())
+        .then(data => {
+            // Update Data Kualitas Air
+            if(data.kualitas_air) {
+                document.getElementById('val-ph').innerText = data.kualitas_air.ph;
+                document.getElementById('val-tur').innerText = data.kualitas_air.turbidity + ' NTU';
+                document.getElementById('val-tds').innerText = data.kualitas_air.tds + ' ppm';
+                document.getElementById('val-do').innerText = data.kualitas_air.nilai_do + ' mg/L';
+                document.getElementById('val-suhu').innerText = data.kualitas_air.suhu + ' °C';
+            }
+
+            // Update Data Pakan Ikan
+            if(data.pakan_ikan) {
+                document.getElementById('val-berat').innerText = data.pakan_ikan.berat_pakan + ' kg';
+                document.getElementById('val-sisa').innerText = data.pakan_ikan.sisa_pakan + ' %';
+            }
+        })
+        .catch(error => console.error('Gagal mengambil data dari VPS:', error));
+}
+
+// Jalankan fungsi narik data pertama kali web dibuka
+updateData();
+
+// Bikin otomatis narik data baru tiap 5 detik (5000 milidetik)
+setInterval(updateData, 5000);
