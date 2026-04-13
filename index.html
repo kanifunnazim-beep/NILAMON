@@ -31,9 +31,16 @@
                         <h1>Monitoring Kualitas Air</h1>
                         <p class="subtitle">Data *real-time* dari LoRa Gateway</p>
                     </div>
-                    <div class="date-box">
-                        <i class="fa-regular fa-calendar"></i>
-                        <span class="tanggal-hari-ini">Memuat tanggal...</span>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <a href="http://203.194.114.41/export_excel.php" target="_blank" class="date-box" style="text-decoration: none; cursor: pointer; color: #009688; background-color: #e0f2f1; font-weight: bold; border: 1px solid #80cbc4; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <i class="fa-solid fa-file-csv"></i>
+                            <span>Unduh Data</span>
+                        </a>
+                        <div class="date-box">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span class="tanggal-hari-ini">Memuat tanggal...</span>
+                        </div>
                     </div>
                 </header>
 
@@ -41,18 +48,28 @@
                     <div class="card"><div class="card-icon"><i class="fa-solid fa-flask"></i></div><div class="card-data"><h4>pH Air</h4><h2 id="val-ph">7.2</h2></div></div>
                     <div class="card"><div class="card-icon"><i class="fa-solid fa-droplet"></i></div><div class="card-data"><h4>Turbidity</h4><h2 id="val-tur">15 NTU</h2></div></div>
                     <div class="card"><div class="card-icon"><i class="fa-solid fa-cubes"></i></div><div class="card-data"><h4>TDS</h4><h2 id="val-tds">350 ppm</h2></div></div>
-                    <div class="card"><div class="card-icon"><i class="fa-solid fa-bubbles"></i></div><div class="card-data"><h4>DO</h4><h2 id="val-do">6.5 mg/L</h2></div></div>
+                    <div class="card"><div class="card-icon"><i class="fa-solid fa-wind"></i></div><div class="card-data"><h4>DO</h4><h2 id="val-do">6.5 mg/L</h2></div></div>
                     <div class="card"><div class="card-icon"><i class="fa-solid fa-temperature-half"></i></div><div class="card-data"><h4>Suhu Air</h4><h2 id="val-suhu">28 °C</h2></div></div>
                 </section>
 
                 <section class="chart-section">
+                    <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 15px;">
+                        <label style="font-weight: bold; margin-right: 10px; color: #2d3436;">Filter Waktu Grafik:</label>
+                        <select id="filterWaktu" onchange="updateData()" style="padding: 8px 12px; border-radius: 8px; cursor: pointer; border: 1px solid #b2bec3; font-family: inherit; font-weight: bold; color: #2d3436; background-color: #fff;">
+                            <option value="menit">Per Menit</option>
+                            <option value="jam">Per Jam</option>
+                            <option value="hari">Per Hari</option>
+                            <option value="minggu">Per Minggu</option>
+                        </select>
+                    </div>
+
                     <div class="chart-card" style="margin-bottom: 20px;">
-                        <h3>Grafik pH, Turbidity, DO & Suhu (Per Jam)</h3>
+                        <h3>Grafik pH, Turbidity, DO & Suhu</h3>
                         <canvas id="kualitasAirChart"></canvas>
                     </div>
 
                     <div class="chart-card">
-                        <h3>Grafik TDS (Per Jam)</h3>
+                        <h3>Grafik TDS</h3>
                         <canvas id="tdsChart"></canvas>
                     </div>
                 </section>
@@ -90,6 +107,39 @@
                         </div>
                     </div>
                 </section>
+
+                <section style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-top: 25px;">
+                    <h3 style="margin-top: 0; color: #2d3436; border-bottom: 2px solid #f1f2f6; padding-bottom: 12px; font-size: 1.2rem;">
+                        <i class="fa-solid fa-sliders" style="color: #0984e3;"></i> Panel Kontrol Smart Feeder
+                    </h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px;">
+                        
+                        <div style="flex: 1; min-width: 250px;">
+                            <label style="font-weight: bold; color: #636e72; display: block; margin-bottom: 10px;">Frekuensi Pakan (Per Hari):</label>
+                            <div style="display: flex; gap: 10px;" id="grup-frekuensi">
+                                <div class="opsi-frekuensi aktif" onclick="pilihFrekuensi(this, 1)" style="flex: 1; text-align: center; background: #e3f2fd; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: bold; color: #0984e3; border: 2px solid #0984e3;">1x</div>
+                                <div class="opsi-frekuensi" onclick="pilihFrekuensi(this, 2)" style="flex: 1; text-align: center; background: #f1f2f6; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: bold; color: #636e72; border: 2px solid transparent;">2x</div>
+                                <div class="opsi-frekuensi" onclick="pilihFrekuensi(this, 3)" style="flex: 1; text-align: center; background: #f1f2f6; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: bold; color: #636e72; border: 2px solid transparent;">3x</div>
+                            </div>
+                        </div>
+
+                        <div style="flex: 1; min-width: 250px;">
+                            <label style="font-weight: bold; color: #636e72; display: block; margin-bottom: 10px;">Takaran Sekali Makan (Kg):</label>
+                            <div style="display: flex; align-items: center; background: #f1f2f6; border-radius: 10px; padding: 8px 15px; border: 2px solid transparent; transition: 0.3s;" onfocusin="this.style.border='2px solid #0984e3'" onfocusout="this.style.border='2px solid transparent'">
+                                <input type="number" id="input-takaran" step="0.1" min="0.1" value="1.5" style="border: none; background: transparent; width: 100%; padding: 8px 0; font-size: 1.1rem; font-weight: bold; color: #2d3436; outline: none;">
+                                <span style="font-weight: bold; color: #b2bec3; font-size: 1.1rem;">Kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; text-align: right;">
+                        <button onclick="simpanKonfigurasi()" style="background: #0984e3; color: white; border: none; padding: 12px 30px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3); transition: 0.2s;">
+                            <i class="fa-solid fa-floppy-disk" style="margin-right: 8px;"></i> Simpan Perubahan
+                        </button>
+                    </div>
+                </section>
+                
             </div>
 
         </main>
